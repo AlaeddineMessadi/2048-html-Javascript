@@ -35,3 +35,15 @@ function makeNew(row, col) {
     .appendTo($('#grid'));
 	//$('#grid').append($('#grid .box:first'));
 }
+
+function hasUnusedCell() {
+    for (var i = 0; i < GRID_SIZE; i++) {
+      for (var j = 0; j < GRID_SIZE; j++) {
+        if (grid[i][j] == null) {
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
