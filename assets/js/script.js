@@ -146,3 +146,39 @@ function moveDown() {
 		didMovement();
 	}
 }
+
+function moveLeft() {
+	var moved = false;
+
+	for (var i = 0; i < GRID_SIZE; i++) {
+		for (var j = 0; j < GRID_SIZE; j++) {
+			for (var k = j + 1; k < GRID_SIZE; k++) {
+				if (tryMove(i, k, i, j)) {
+					moved = true;
+				}
+			}
+		}
+	}
+
+	if (moved) {
+		didMovement();
+	}
+}
+
+function moveRight() {
+	var moved = false;
+
+	for (var i = 0; i < GRID_SIZE; i++) {
+		for (var j = GRID_SIZE - 1; j >= 0; j--) {
+			for (var k = j - 1; k >= 0; k--) {
+				if (tryMove(i, k, i, j)) {
+					moved = true;
+				}
+			}
+		}
+	}
+
+	if (moved) {
+		didMovement();
+	}
+}
