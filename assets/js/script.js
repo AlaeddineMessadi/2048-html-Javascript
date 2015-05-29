@@ -182,3 +182,33 @@ function moveRight() {
 		didMovement();
 	}
 }
+
+function merge(row1, col1, row2, col2) {
+	if (merging[row2][col2]) {
+		return false;
+	}
+
+	grid[row2][col2].remove();
+	grid[row2][col2] = grid[row1][col1];
+	grid[row1][col1] = null;
+	var number = grid[row2][col2].text() * 2;
+	var color = pikColor(number);
+	var textcolor = textColor(number);
+	merging[row2][col2] = true;
+
+	grid[row2][col2].css({
+		top : row2 * 100 + 'px',
+		left : col2 * 100 + 'px'
+	}).text(number).animate({
+		height : '90px',
+		width : '90px'
+	}, 100).animate({
+		backgroundColor : color,
+		color : textcolor
+	}, 100).animate({
+		height : '80px',
+		width : '80px'
+	}, 100);
+
+	return true;
+}
