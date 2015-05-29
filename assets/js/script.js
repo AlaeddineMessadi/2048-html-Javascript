@@ -235,3 +235,54 @@ function didMovement() {
 		makeNew(unused[0], unused[1]);
 	}
 }
+
+// pick a color
+
+function pikColor(number) {
+	var color;
+	switch (number) {
+	case 2:
+		color = '#EEEE4DA'
+		break;
+	case 4:
+		color = '#EDE0C8'
+		break;
+	case 8:
+		color = '#F2B179'
+		break;
+	case 16:
+		color = '#EE770F'
+		break;
+	case 32:
+		color = '#EE4A0F'
+		break;
+	case 64:
+		color = '#EE0F0F'
+		break;
+	case 128:
+		color = '#E4D505'
+	case 256:
+		color = '#EDED62'
+		break;
+	case 512:
+		color = '#B4C953'
+	case 1024:
+		color = '#E5FF71'
+	default:
+		color = '#3CF713'
+	}
+	return color;
+}
+
+// text's color 
+function textColor(number) {
+	var textColor;
+	if (number <= 4) {
+		textColor = "#776E65";
+	} else {
+		textColor = "#F9F6F2";
+	}
+	return textColor;
+}
+
+
