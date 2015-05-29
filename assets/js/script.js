@@ -53,3 +53,25 @@ function findUnusedCell() {
 		}
 	}
 }
+
+function isRelationBlocked(row1, col1, row2, col2) {
+	if (row1 == row2) {
+		var min = Math.min(col1, col2);
+		var max = Math.max(col1, col2);
+
+		for (var mid = min + 1; mid < max; mid++) {
+			if (grid[row1][mid])
+				return true;
+		}
+	} else {
+		var min = Math.min(row1, row2);
+		var max = Math.max(row1, row2);
+
+		for (var mid = min + 1; mid < max; mid++) {
+			if (grid[mid][col1])
+				return true;
+		}
+	}
+
+	return false;
+}
