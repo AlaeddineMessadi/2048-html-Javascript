@@ -79,34 +79,70 @@ function isRelationBlocked(row1, col1, row2, col2) {
 }
 // try to move
 function tryMove(row1, col1, row2, col2) {
-    if (grid[row1][col1] == null || isRelationBlocked(row1, col1, row2, col2)) {
-      return false;
-    }
+	if (grid[row1][col1] == null || isRelationBlocked(row1, col1, row2, col2)) {
+		return false;
+	}
 
-    if (grid[row2][col2] == null) {
-      return move(row1, col1, row2, col2);
-    } else if (grid[row1][col1].text() == grid[row2][col2].text()) {
-      return merge(row1, col1, row2, col2);
-    }
+	if (grid[row2][col2] == null) {
+		return move(row1, col1, row2, col2);
+	} else if (grid[row1][col1].text() == grid[row2][col2].text()) {
+		return merge(row1, col1, row2, col2);
+	}
 
-    return false;
-  }
+	return false;
+}
 
-//Tile moving
-  function move(row1, col1, row2, col2) {
-    grid[row2][col2] = grid[row1][col1];
-    grid[row1][col1] = null;
-    var number = grid[row2][col2].text()*1 ;
-	  var color = pikColor(number);
-	  var textcolor = textColor(number);
-	  
-    grid[row2][col2].css({
-      background: color,
-		color: textcolor})
-		.animate({
-      top  : row2 * 100 + 'px',
-      left : col2 * 100 + 'px'
-    },100).text(number);
+// Tile moving
+function move(row1, col1, row2, col2) {
+	grid[row2][col2] = grid[row1][col1];
+	grid[row1][col1] = null;
+	var number = grid[row2][col2].text() * 1;
+	var color = pikColor(number);
+	var textcolor = textColor(number);
 
-    return true;
-  }
+	grid[row2][col2].css({
+		background : color,
+		color : textcolor
+	}).animate({
+		top : row2 * 100 + 'px',
+		left : col2 * 100 + 'px'
+	}, 100).text(number);
+
+	return true;
+}
+
+function moveUp() {
+	var moved = false;
+
+	for (var i = 0; i < GRID_SIZE; i++) {
+		for (var j = 0; j < GRID_SIZE; j++) {
+			for (var k = j + 1; k < GRID_SIZE; k++) {
+				if (tryMove(k, i, j, i)) {
+					moved = true;
+				}
+			}
+		}
+	}
+
+	if (moved) {
+		didMovement();
+	}
+}
+
+function moveDown() {
+	var moved = false;
+
+	for (var i = 0; i < GRID_SIZE; i++) {
+		for (var j = GRID_SIZE - 1; j >= 0; j--) {
+			for (var k = j - 1; k >= 0; k--) {
+				if (tryMove(k, i, j, i)) {
+					moved = true;
+				}
+			}
+		}
+	}
+
+	if (moved) {
+		didMovement();
+	}
+}
