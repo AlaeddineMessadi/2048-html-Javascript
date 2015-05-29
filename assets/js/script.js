@@ -16,3 +16,22 @@ for (var i = 0; i < GRID_SIZE; i++) {
 	grid.push(row1);
 	merging.push(row2);
 }
+
+
+function makeNew(row, col) {
+  var number = Math.random() < 0.9 ? 2 : 4;
+  var color = pikColor(number);
+  var textcolor = textColor(number);
+
+  return grid[row][col] = $('<div>')
+    .css({
+	  background: color,
+	  color: textColor,
+      top  : row * 100 + 'px',
+      left : col * 100 + 'px'
+    })
+    .text(number)
+    .addClass('box')
+    .appendTo($('#grid'));
+	//$('#grid').append($('#grid .box:first'));
+}
