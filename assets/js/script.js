@@ -285,4 +285,17 @@ function textColor(number) {
 	return textColor;
 }
 
+$(document).ready(function() {
+    $(document).keydown(function(e) {
+      if (e.keyCode == 37) moveLeft();
+      if (e.keyCode == 38) moveUp();
+      if (e.keyCode == 39) moveRight();
+      if (e.keyCode == 40) moveDown();
+    });
 
+    var unused = findUnusedCell();
+    makeNew(unused[0], unused[1]);
+
+    var unused = findUnusedCell();
+    makeNew(unused[0], unused[1]);
+  });
