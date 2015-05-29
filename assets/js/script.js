@@ -111,6 +111,7 @@ function move(row1, col1, row2, col2) {
 	return true;
 }
 
+// move the cell up
 function moveUp() {
 	var moved = false;
 
@@ -129,6 +130,7 @@ function moveUp() {
 	}
 }
 
+// move the cell down
 function moveDown() {
 	var moved = false;
 
@@ -147,6 +149,7 @@ function moveDown() {
 	}
 }
 
+// move the cell left
 function moveLeft() {
 	var moved = false;
 
@@ -165,6 +168,7 @@ function moveLeft() {
 	}
 }
 
+// move the cell right
 function moveRight() {
 	var moved = false;
 
@@ -183,6 +187,7 @@ function moveRight() {
 	}
 }
 
+// merge two cells
 function merge(row1, col1, row2, col2) {
 	if (merging[row2][col2]) {
 		return false;
@@ -211,4 +216,22 @@ function merge(row1, col1, row2, col2) {
 	}, 100);
 
 	return true;
+}
+
+// cleare merging
+function clearMerging() {
+	for (var i = 0; i < GRID_SIZE; i++) {
+		for (var j = 0; j < GRID_SIZE; j++) {
+			merging[i][j] = false;
+		}
+	}
+}
+
+function didMovement() {
+	clearMerging();
+
+	if (hasUnusedCell()) {
+		var unused = findUnusedCell();
+		makeNew(unused[0], unused[1]);
+	}
 }
