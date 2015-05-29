@@ -43,6 +43,7 @@ function hasUnusedCell() {
 	return false;
 }
 
+// Find Unused Cell
 function findUnusedCell() {
 	while (true) {
 		var row = Math.floor(Math.random() * GRID_SIZE);
@@ -54,6 +55,7 @@ function findUnusedCell() {
 	}
 }
 
+// check if relationBlocked
 function isRelationBlocked(row1, col1, row2, col2) {
 	if (row1 == row2) {
 		var min = Math.min(col1, col2);
@@ -75,3 +77,36 @@ function isRelationBlocked(row1, col1, row2, col2) {
 
 	return false;
 }
+// try to move
+function tryMove(row1, col1, row2, col2) {
+    if (grid[row1][col1] == null || isRelationBlocked(row1, col1, row2, col2)) {
+      return false;
+    }
+
+    if (grid[row2][col2] == null) {
+      return move(row1, col1, row2, col2);
+    } else if (grid[row1][col1].text() == grid[row2][col2].text()) {
+      return merge(row1, col1, row2, col2);
+    }
+
+    return false;
+  }
+
+//Tile moving
+  function move(row1, col1, row2, col2) {
+    grid[row2][col2] = grid[row1][col1];
+    grid[row1][col1] = null;
+    var number = grid[row2][col2].text()*1 ;
+	  var color = pikColor(number);
+	  var textcolor = textColor(number);
+	  
+    grid[row2][col2].css({
+      background: color,
+		color: textcolor})
+		.animate({
+      top  : row2 * 100 + 'px',
+      left : col2 * 100 + 'px'
+    },100).text(number);
+
+    return true;
+  }
